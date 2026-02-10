@@ -24,8 +24,8 @@ def mostrar_menu():
 
 def mostrar_percepcoes(celula):
     if "B" in celula:
-        print("🌬️ Você sente uma brisa.")
+        print(" Você sente uma brisa.")
     if "F" in celula:
-        print("😷 Você sente um fedor.")
+        print(" Você sente um fedor.")
     if "O" in celula:
-        print("✨ Você vê um brilho.")
+        print(" Você vê um brilho.")
