@@ -1,5 +1,7 @@
 import sys
 import os
+import time
+
 sys.path.append(os.path.dirname(__file__))
 
 from agente import inicializar_agente, mover
@@ -29,19 +31,22 @@ def main():
         if acao in ["N", "S", "L", "O"]:
             mover(agente, acao)
             verificar_perigos(mundo, agente)
+            time.sleep(1)
 
         # PEGAR OURO
         elif acao == "P":
             if "O" in celula:
                 agente["ouro"] = True
-                print("\n🏆 Você pegou o ouro!")
+                print("\n Você pegou o ouro!")
             else:
                 print("\nNão há ouro aqui.")
+            time.sleep(1.5)
 
         # ATIRAR FLECHA
         elif acao == "F":
             if agente["flechas"] == 0:
                 print("\nVocê não tem mais flechas!")
+                time.sleep(1.5)
             else:
                 direcao = input("Direção da flecha (N/S/L/O): ").upper()
                 linha, coluna = agente["posicao"]
@@ -55,24 +60,30 @@ def main():
                 elif direcao == "O" and coluna > 0:
                     alvo = (linha, coluna - 1)
                 else:
-                    print("Direção inválida!")
+                    print("\nDireção inválida!")
+                    time.sleep(1)
                     continue
 
                 agente["flechas"] -= 1
                 matou = matar_wumpus(mundo, alvo)
 
-                if not matou:
-                    print("A flecha não acertou nada.")
-
+                if matou:
+                    print("\n WUMPUS MORTO! ")
+                    time.sleep(2)
+                else:
+                    print("\nA flecha não acertou nada.")
+                    time.sleep(1.5)
 
         # SAIR
         elif acao == "X":
             print("\nSaindo do jogo...")
+            time.sleep(1)
             break
 
         # AÇÃO INVÁLIDA
         else:
             print("\nAção inválida!")
+            time.sleep(1)
 
     limpar_tela()
 
@@ -81,7 +92,7 @@ def main():
     elif not agente["vivo"]:
         print(" FIM DE JOGO! Você morreu.")
     else:
-        print(" Jogo encerrado.")
+        print("Jogo encerrado.")
 
 
 main()

@@ -16,14 +16,19 @@ def obter_celula(mundo, posicao):
 def verificar_perigos(mundo, agente):
     celula = obter_celula(mundo, agente["posicao"])
 
-    if "P" in celula or "W" in celula:
+    if "P" in celula:
         agente["vivo"] = False
-        print("VOCÊ MORREU!")
+        print(" Você caiu em um poço!")
+
+    elif "W" in celula:
+        agente["vivo"] = False
+        print(" O Wumpus te matou!")
+
+
 def matar_wumpus(mundo, posicao):
     linha, coluna = posicao
-    celula = mundo[linha][coluna]
 
-    if "W" in celula:
+    if "W" in mundo[linha][coluna]:
         mundo[linha][coluna] = ("V",)
         print(" Você matou o Wumpus!")
         return True
